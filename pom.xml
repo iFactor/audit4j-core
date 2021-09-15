@@ -23,7 +23,7 @@
 	<artifactId>audit4j-core</artifactId>
 	<packaging>jar</packaging>
 	<name>Audit4j - Core</name>
-	<version>2.6.0</version>
+	<version>2.7.0</version>
 	<url>http://audit4j.org</url>
 	<description>Audit4j - An open-source auditing framework for Java, Core</description>
 
@@ -72,17 +72,38 @@
 	</ciManagement>
 
 	<distributionManagement>
+		<!-- Publish releases here -->
 		<repository>
-			<id>oss.sonatype.org</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+			<id>kubra-tempe-nexus</id>
+			<name>Energy Suite Nexus</name>
+			<url>${kubra-tempe-nexus.base.url}/repository/releases</url>
 		</repository>
+
+		<!-- Publish snapshots here -->
 		<snapshotRepository>
-			<id>oss.sonatype.org</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<id>kubra-tempe-nexus</id>
+			<name>KUBRA Tempe Nexus</name>
+			<url>${kubra-tempe-nexus.base.url}/repository/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 
+	<!-- download artifacts from this repo -->
+	<repositories>
+		<repository>
+			<id>kubra-tempe-nexus</id>
+			<name>KUBRA Tempe Nexus artifacts</name>
+			<url>${kubra-tempe-nexus.base.url}/repository/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
 	<properties>
+		<kubra-tempe-nexus.base.url>${env.NEXUS_URI}</kubra-tempe-nexus.base.url>
 		<junit.version>4.12</junit.version>
 		<mockito.version>1.10.19</mockito.version>
 		<commons-lang3.version>3.4</commons-lang3.version>
@@ -124,7 +145,7 @@
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
-			<version>1.4.8</version>
+			<version>1.4.18</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectreactor</groupId>
@@ -134,7 +155,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.2.24</version>
+			<version>1.2.78</version>
 		</dependency>
 
 		<!-- Do not change below dependency version unless testing properly -->
@@ -278,30 +299,6 @@
 			<plugin>
 				<artifactId>maven-deploy-plugin</artifactId>
 				<version>2.8.2</version>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.sonatype.plugins</groupId>
-				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.6.5</version>
-				<extensions>true</extensions>
-				<configuration>
-					<serverId>oss.sonatype.org</serverId>
-					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-					<description>${project.version}</description>
-				</configuration>
-				<executions>
-					<execution>
-						<id>deploy-to-sonatype</id>
-						<phase>deploy</phase>
-						<goals>
-							<goal>deploy</goal>
-							<goal>release</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
