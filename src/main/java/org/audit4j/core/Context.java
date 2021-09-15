@@ -18,6 +18,9 @@
 
 package org.audit4j.core;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import org.audit4j.core.command.CommandProcessor;
 import org.audit4j.core.command.impl.BatchCommand;
 import org.audit4j.core.command.impl.MetadataCommand;
