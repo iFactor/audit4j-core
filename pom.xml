@@ -106,7 +106,7 @@
 		<kubra-tempe-nexus.base.url>${env.NEXUS_URI}</kubra-tempe-nexus.base.url>
 		<junit.version>4.12</junit.version>
 		<mockito.version>1.10.19</mockito.version>
-		<commons-lang3.version>3.4</commons-lang3.version>
+		<commons-lang3.version>3.21.0</commons-lang3.version>
 	</properties>
 
 	<dependencies>
